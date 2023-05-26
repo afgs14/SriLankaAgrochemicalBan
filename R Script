@@ -6,7 +6,6 @@
 
 # Packages ---------------------------------------------------------------------
 # Loading packages -------------------------------------------------------------
-## Only loading the ones I actually use later on here. 
 library(tidyverse)
 library(ggpubr)
 library(RColorBrewer)
@@ -36,16 +35,16 @@ library(scales)
 # 1.1. Loading data from computer (change source later) -------------------
 data_SHY <- read_csv("DCSFlattenedData2.csv")    # Gross extent sown, gross extent harvested and average yield per net ha, by region, irrigation type and year 2004/2005 maha to 2022 yala  
 data_zone_alloc <- read_csv("ZoneAllocation.csv")    # Climate zone of each region
-data_zone_km <- read_csv("Data_region_km2.csv")
-data_population <- read_csv("Data_SL_pop.csv")
-data_rice_var <- read_csv("Data_rice_var.csv")
-data_rice_nutri <- read_csv("Data_nutri_rice.csv")
-data_FDA_nutri <- read_csv("Data_FDA_nutri.csv")
-data_chaudhary_brooks <- read_csv("Chaudhary_and_Brooks_CFs.csv")
-data_ecoregion_alloc <- read_csv("EcoregionAllocation.csv")  
-data_tree_cover_total <- read_csv("Data_SL_tree_cover_2020.csv")
-Data_region_link <- read_csv("Data_region_link.csv")
-ecoregions <- st_read("Terrestrial_Ecoregions.geojson")
+data_zone_km <- read_csv("Data_region_km2.csv")    # District area data
+data_population <- read_csv("Data_SL_pop.csv")    # Population data
+data_rice_var <- read_csv("Data_rice_var.csv")    # Rice variety data
+data_rice_nutri <- read_csv("Data_nutri_rice.csv")    # Nutrition data from rice
+data_FDA_nutri <- read_csv("Data_FDA_nutri.csv")    # FDA recommendations
+data_chaudhary_brooks <- read_csv("Chaudhary_and_Brooks_CFs.csv")    # Chaudhary & Brooks data
+data_ecoregion_alloc <- read_csv("EcoregionAllocation.csv")    # Ecoregions (across world)
+data_tree_cover_total <- read_csv("Data_SL_tree_cover_2020.csv")    # Tree cover data
+Data_region_link <- read_csv("Data_region_link.csv")    # Data to link regions to map data
+ecoregions <- st_read("Terrestrial_Ecoregions.geojson")    # 
 data_hh_expenditure <- read_csv("Houeshold_expenditure.csv")  
 SL_districts <- geojson_read("https://raw.githubusercontent.com/wmgeolab/geoBoundaries/c3eef3778e5738cfb9ef13289be7b604780e835a/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2.geojson",  what = "sp")
 map <- read_sf("https://raw.githubusercontent.com/wmgeolab/geoBoundaries/c3eef3778e5738cfb9ef13289be7b604780e835a/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2.geojson")
@@ -296,6 +295,7 @@ GLM_data <- left_join(GLM_data, data_province_alloc, by = "Region")
 GLM_data <- GLM_data[GLM_data$Value !=0, ]    # Removing zeros (because they don't mean a yield of 0 but that no harvest happened at all). 
 
 # 2.1.2. Climate zones ---------------------------------------------------------
+
 ## There are 3 climate zones - Dry, Intermediate and Wet. 
 ## TLDR: No difference between Dry and Intermediate: grouped those into 1 zone; those are different to wet zone. 
 zone_dif <- lm(Value ~ Zone, GLM_data)    # Making a simple linear model to look at impact of climate zone
@@ -1620,9 +1620,6 @@ Biodiversity_impact_graph <- Biodiversity_impact5 %>%
   summarise(Verts_loss = sum(Verts_loss),
             Plants_loss = sum(Plants_loss))
 Map_ecoregions3 <- left_join(Map_ecoregions, Biodiversity_impact_graph, by = "Ecoregion")
-Map_ecoregions4 <- Map_ecoregions3 %>%
-  filter(Taxon == "Verts_loss")
-  # Vertebrate loss map
 main_verts <- ggplot(Map_ecoregions3) +
   geom_sf(color = NA, aes(fill = Verts_loss)) +    
   coord_sf(xlim = c(79.5, 82), ylim = c(5.8, 9.9), expand = FALSE) +    
@@ -2050,4 +2047,5 @@ ggplot(Weighted_scen_graph, aes(x = Decile, y = Consumption_cal, color = Ban_sta
         legend.title.align = 0.5) +
   guides(color = guide_legend(title.position = "top", title.hjust=0.5,
                               reverse = TRUE)) # reverse the order of the legend labels
+
 
