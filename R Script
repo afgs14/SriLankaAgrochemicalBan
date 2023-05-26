@@ -33,19 +33,19 @@ library(scales)
 
 # SECTION 1 - PROCESSING DATA --------------------------------------------------
 # 1.1. Loading data from computer (change source later) -------------------
-data_SHY <- read_csv("DCSFlattenedData2.csv")    # Gross extent sown, gross extent harvested and average yield per net ha, by region, irrigation type and year 2004/2005 maha to 2022 yala  
-data_zone_alloc <- read_csv("ZoneAllocation.csv")    # Climate zone of each region
-data_zone_km <- read_csv("Data_region_km2.csv")    # District area data
-data_population <- read_csv("Data_SL_pop.csv")    # Population data
-data_rice_var <- read_csv("Data_rice_var.csv")    # Rice variety data
-data_rice_nutri <- read_csv("Data_nutri_rice.csv")    # Nutrition data from rice
-data_FDA_nutri <- read_csv("Data_FDA_nutri.csv")    # FDA recommendations
-data_chaudhary_brooks <- read_csv("Chaudhary_and_Brooks_CFs.csv")    # Chaudhary & Brooks data
-data_ecoregion_alloc <- read_csv("EcoregionAllocation.csv")    # Ecoregions (across world)
-data_tree_cover_total <- read_csv("Data_SL_tree_cover_2020.csv")    # Tree cover data
-Data_region_link <- read_csv("Data_region_link.csv")    # Data to link regions to map data
+data_SHY <- read_csv("Paddy_sown_harvested_yield.csv")    # Gross extent sown, gross extent harvested and average yield per net ha, by region, irrigation type and year 2004/2005 maha to 2022 yala  
+data_zone_alloc <- read_csv("Zone_allocation.csv")    # Climate zone of each region
+data_zone_km <- read_csv("Region_area.csv")    # District area data
+data_population <- read_csv("SL_population.csv")    # Population data
+data_rice_var <- read_csv("Rice_varieties.csv")    # Rice variety data
+data_rice_nutri <- read_csv("Rice_nutrition.csv")    # Nutrition data from rice
+data_FDA_nutri <- read_csv("FDA_recs.csv")    # FDA recommendations
+data_chaudhary_brooks <- read_csv("Chaudhary_Brooks.csv")    # Chaudhary & Brooks data
+data_ecoregion_alloc <- read_csv("Ecoregion_allocation.csv")    # Ecoregions (across world)
+data_tree_cover_total <- read_csv("Tree_cover.csv")    # Tree cover data
+Data_region_link <- read_csv("Region_link.csv")    # Data to link regions to map data
 ecoregions <- st_read("Terrestrial_Ecoregions.geojson")    # 
-data_hh_expenditure <- read_csv("Houeshold_expenditure.csv")  
+data_hh_expenditure <- read_csv("Household_expenditure.csv")  
 SL_districts <- geojson_read("https://raw.githubusercontent.com/wmgeolab/geoBoundaries/c3eef3778e5738cfb9ef13289be7b604780e835a/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2.geojson",  what = "sp")
 map <- read_sf("https://raw.githubusercontent.com/wmgeolab/geoBoundaries/c3eef3778e5738cfb9ef13289be7b604780e835a/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2.geojson")
 districts <- st_read("https://raw.githubusercontent.com/wmgeolab/geoBoundaries/c3eef3778e5738cfb9ef13289be7b604780e835a/releaseData/gbOpen/LKA/ADM2/geoBoundaries-LKA-ADM2.geojson")
