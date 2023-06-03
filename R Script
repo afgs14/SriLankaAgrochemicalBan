@@ -34,6 +34,7 @@ library(scales)
 # SECTION 1 - PROCESSING DATA --------------------------------------------------
 # 1.1. Loading data from computer (change source later) -------------------
 data_SHY <- read_csv("Paddy_sown_harvested_yield.csv")    # Gross extent sown, gross extent harvested and average yield per net ha, by region, irrigation type and year 2004/2005 maha to 2022 yala  
+data_HP <- read_csv("Paddy_harvested_production.csv")    # Net extent harvested and produced by region and year 2004/2005 maha to 2022 yala
 data_zone_alloc <- read_csv("Zone_allocation.csv")    # Climate zone of each region
 data_zone_km <- read_csv("Region_area.csv")    # District area data
 data_population <- read_csv("SL_population.csv")    # Population data
